@@ -2,9 +2,19 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Spinner from '../layouts/Spinner';
 
-const User = ({ loading, getUser, user, match }) => {
+import Repos from '../repos/Repos';
+
+const User = ({
+	loading,
+	getUser,
+	getUserRepos,
+	repos,
+	user,
+	match,
+}) => {
 	useEffect(() => {
 		getUser(match.params.login);
+		getUserRepos(match.params.login);
 		// eslint-disable-next-line
 	}, []);
 	const {
@@ -27,14 +37,23 @@ const User = ({ loading, getUser, user, match }) => {
 	}
 	return (
 		<>
-			<Link to='/' className='btn btn-sm'>
-				Back To Search
-			</Link>
-			{hireable ? (
-				<i className='fas fa-check text-success' />
-			) : (
-				<i className='fas fa-times-circle text-danger' />
-			)}
+			<div className='hirable-search'>
+				<Link to='/' className='btn btn-primary'>
+					Back To Search
+				</Link>
+				{hireable ? (
+					<p className='py-1'>
+						<strong>Hirable</strong>
+						<i className='fas fa-check text-success' />
+					</p>
+				) : (
+					<p className='py-1'>
+						<strong>Hirable</strong>
+						<i className='fas fa-times-circle text-danger' />
+					</p>
+				)}
+			</div>
+
 			<div className='card grid-2'>
 				<div className='all-center'>
 					<img
@@ -53,7 +72,9 @@ const User = ({ loading, getUser, user, match }) => {
 							<p>{bio}</p>
 						</>
 					)}
-					<Link to={html_url} className='m-1 btn btn-dark'>
+					<Link
+						to={html_url}
+						className='m-1 btn btn-primary'>
 						Visit Github Profile
 					</Link>
 					<ul>
@@ -96,9 +117,11 @@ const User = ({ loading, getUser, user, match }) => {
 					Public Repose: {public_repos}
 				</div>
 				<div className='badge badge-success'>
-					Followers: {public_gists}
+					Public Gists: {public_gists}
 				</div>
 			</div>
+
+			<Repos repos={repos} />
 		</>
 	);
 };

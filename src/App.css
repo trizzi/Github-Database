@@ -2,8 +2,8 @@
 
 /* Global Styles */
 :root {
-	--primary-color: #003699;
-	--dark-color: #000;
+	--primary-color: #000;
+	--dark-color: #003699;
 	--light-color: #f4f4f4;
 	--danger-color: #dc3545;
 	--success-color: #28a745;
@@ -200,7 +200,7 @@ img {
 	display: inline-block;
 	background: var(--primary-color);
 	color: #fff;
-	padding: 0.4rem 1.3rem;
+	padding: 1rem 1.3rem;
 	font-size: 1rem;
 	border: none;
 	cursor: pointer;
@@ -374,6 +374,10 @@ table th {
 
 .navbar .welcome span {
 	margin-right: 0.6rem;
+}
+
+.hirable-search {
+	display: flex;
 }
 
 /* Mobile Styles */

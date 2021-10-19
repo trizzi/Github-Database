@@ -16,6 +16,7 @@ import './App.css';
 const App = () => {
 	const [users, setUsers] = useState([]);
 	const [user, setUser] = useState({});
+	const [repos, setRepos] = useState([]);
 	const [loading, setloading] = useState(false);
 	const [alert, setAlert] = useState(null);
 
@@ -40,6 +41,18 @@ const App = () => {
     &client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
 
 		setUser(res.data);
+		setloading(false);
+	};
+
+	// Get User Repos
+	const getUserRepos = async (username) => {
+		setloading(true);
+
+		const res =
+			await axios.get(`https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}
+    &client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+
+		setRepos(res.data);
 		setloading(false);
 	};
 
@@ -91,6 +104,8 @@ const App = () => {
 								<User
 									{...props}
 									getUser={getUser}
+									getUserRepos={getUserRepos}
+									repos={repos}
 									user={user}
 									loading={loading}
 								/>
