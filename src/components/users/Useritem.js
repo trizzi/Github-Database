@@ -16,7 +16,7 @@ const Useritem = ({
 			<div>
 				<Link
 					to={`/user/${login}`}
-					className='btn btn-dark btn-sm my-1'>
+					className='btn btn-primary btn-sm my-1'>
 					More
 				</Link>
 			</div>
